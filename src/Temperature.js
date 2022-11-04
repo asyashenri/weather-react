@@ -1,11 +1,11 @@
 import React from "react";
 import "./styles.css";
 
-export default function Temperature() {
+export default function Temperature(props) {
   return (
     <div className="row">
       <div className="col-6">
-        <h1 id="city">Bern</h1>
+        <h1 id="city">{props.data.city}</h1>
         <h2 id="date">
           Sun, Sep 25
           <br />
@@ -13,12 +13,12 @@ export default function Temperature() {
         </h2>
         <h3>
           <div className="description">
-            <div id="weatherId" className="weatherId">
-              Overcast clouds
+            <div id="weatherId" className="text-capitalize">
+              {props.data.description}
             </div>
-            <div id="wind">Wind: 5 km/h</div>
-            <div id="humidity">Humidity: 50%</div>
-            <div id="feelsLike">Feels like: 14°C</div>
+            <div id="wind">Wind: {props.data.wind} km/h</div>
+            <div id="humidity">Humidity:{props.data.humidity}%</div>
+            <div id="feelsLike">Feels like: {props.data.feelslike}°C</div>
           </div>
         </h3>
       </div>
@@ -34,7 +34,7 @@ export default function Temperature() {
           />
           <div className="float-start">
             <span id="temper" className="temper">
-              18
+              {props.data.temperature}
             </span>
             <span className="hight">
               <a href id="celcius">
