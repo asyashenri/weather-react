@@ -2,37 +2,23 @@ import React, { useState } from "react";
 import "./styles.css";
 
 import axios from "axios";
-import Temperature from "./Temperature";
 
 export default function App(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
-  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
+    console.log(response.data);
     setWeatherData({
       ready: true,
-      coordinates: response.data.coorditates,
       temperature: response.data.temperature.current,
       humidity: response.data.temperature.humidity,
-      date: new Date(response.data.dt * 1000),
+      date: "Sun, Sep 25",
       description: response.data.condition.description,
       icon: response.data.condition.icon,
       wind: response.data.wind.speed,
       city: response.data.city,
       feelslike: response.data.temperature.feels_like,
     });
-  }
-  function handleSubmit(event) {
-    event.preventDefault();
-    search();
-  }
-  function handleCityChange(event) {
-    setCity(event.target.value);
-  }
-  function search() {
-    const apiKey = "427d9bc33t60e242fa0db1e5a5dfoc5f";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query={city}&key={apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
@@ -41,13 +27,12 @@ export default function App(props) {
         <div className="container">
           <div className="card">
             <div className="card-body">
-              <form id="cityForm" onSubmit={handleSubmit}>
+              <form id="cityForm">
                 <input
                   type="search"
                   placeholder="Type a city..."
                   id="textInput"
                   autocomplete="off"
-                  onChange={handleCityChange}
                 />
                 <button type="submit" id="searchbutton">
                   Search
@@ -55,7 +40,50 @@ export default function App(props) {
                 <button id="currentlocation">Current location</button>
               </form>
 
-              <Temperature data={weatherData} />
+              <div className="row">
+                <div className="col-6">
+                  <h1 id="city">{weatherData.city}</h1>
+                  <h2 id="date">
+                    Sun, Sep 25
+                    <br />
+                    18:57
+                  </h2>
+                  <h3>
+                    <div className="description">
+                      <div id="weatherId" className="text-capitalize">
+                        {weatherData.description}
+                      </div>
+                      <div id="wind">
+                        Wind: {Math.round(weatherData.wind)} km/h
+                      </div>
+                      <div id="humidity">Humidity: {weatherData.humidity}%</div>
+                      <div id="feelsLike">
+                        Feels like: {Math.round(weatherData.feelslike)}°C
+                      </div>
+                    </div>
+                  </h3>
+                </div>
+
+                <div className="col-6">
+                  <div className="clearfix">
+                    {weatherData.icon}
+                    <div className="float-start">
+                      <span id="temper" className="temper">
+                        {Math.round(weatherData.temperature)}
+                      </span>
+                      <span className="hight">
+                        <a href id="celcius">
+                          °C
+                        </a>
+                        |
+                        <a href id="fahrenheit">
+                          °F
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -74,7 +102,11 @@ export default function App(props) {
       </div>
     );
   } else {
-    search();
+    const apiKey = "427d9bc33t60e242fa0db1e5a5dfoc5f";
+    let city = "London";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+
     return "Loading..";
   }
 }

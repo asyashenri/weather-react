@@ -3,8 +3,7 @@
   text-align: center;
 }
 body {
-  background-image: url("./clouds.jpeg");
-  background-size: cover;
+  background-color: #7892f9;
   font-family: Arial, Helvetica, sans-serif;
 }
 h1,
@@ -38,18 +37,18 @@ input {
 }
 button {
   color: white;
-  background: #0b6ffc;
+  background: #8d72e1;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 5px 10px;
-  border: 1px solid #066eff;
+  border: 1px solid #8d72e1;
   border-radius: 5px;
   font-size: 16px;
   line-height: 22px;
   margin: 3px;
 }
 button:hover {
-  background-color: #15457b;
-  border: 1px solid #15457b;
+  background-color: #6c4ab6;
+  border: 1px solid #6c4ab6;
   transition: all 150ms ease-in-out;
   cursor: pointer;
 }
@@ -91,7 +90,7 @@ a {
   border-radius: 30px;
 
   margin-top: 18px;
-  background: #c7e1f8;
+  background: #b9e0ff;
 }
 .hight {
   position: relative;
