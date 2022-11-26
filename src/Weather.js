@@ -11,7 +11,11 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
+      coord: response.data.coordinates,
       temperature: response.data.temperature.current,
+      tempmax: response.data.temperature.maximum,
+      tempmin: response.data.temperature.minimum,
+
       humidity: response.data.temperature.humidity,
       date: new Date(response.data.time * 1000),
       description: response.data.condition.description,
@@ -55,7 +59,7 @@ export default function Weather(props) {
               <button id="currentlocation">Current location</button>
             </form>
             <WeatherInfo data={weatherData} />
-            <WeatherForecast data={weatherData} />
+            <WeatherForecast data={weatherData} coord={weatherData.coord} />
           </div>
         </div>
       </div>
