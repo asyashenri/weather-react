@@ -1,4 +1,5 @@
 import React from "react";
+import "./WeatherForecast.css";
 
 export default function WeatherForecastDay(props) {
   function maxTemp() {
@@ -14,7 +15,7 @@ export default function WeatherForecastDay(props) {
   function day() {
     let date = new Date(props.data.time * 1000);
     let day = date.getDay();
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
     return days[day];
   }
